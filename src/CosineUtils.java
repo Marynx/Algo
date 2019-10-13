@@ -60,8 +60,9 @@ public class CosineUtils {
         double tab[]=new double[n];
         double result=0;
         tab[0]=1.0;
-        for(int i=1;i<n;i++) {
-            tab[i]= ((-1) * tab[i - 1] * MathUtils.power(x, 2)) / (2 * i * (2 * i - 1));
+        for(int i=0;i<n-1;i++) {
+           // tab[i]= ((-1) * tab[i - 1] * MathUtils.power(x, 2)) / (2 * i * (2 * i - 1));
+            tab[i+1]= ((-1) * tab[i] * MathUtils.power(x, 2)) / ((2 * i +2)*(2 * i + 1));
         }
     return tab;
     }
@@ -127,8 +128,8 @@ public class CosineUtils {
         for ( int i = 0; i < 1000000; i++ ) {
             double tab[] = CosineUtils.getCosinesTab(n, x);
             double tab1[] = CosineUtils.getCosStartPrevTab(n, x);
-            avgMyCosError += Math.abs(Math.cos(x) - CosineUtils.getCosineSumEndTab(tab));
-            avgMyCosEndError += Math.abs(Math.cos(x) - CosineUtils.addCosPrevTabEnd(tab1));
+            avgMyCosError += Math.abs(Math.cos(x) - CosineUtils.getCosineSumTab(tab));
+            avgMyCosEndError += Math.abs(Math.cos(x) - CosineUtils.addCosPrevTabStart(tab1));
             if ( i % 1000 == 0 && i != 0 ) {
             
                 avgMyCosError = avgMyCosError / 1000;
